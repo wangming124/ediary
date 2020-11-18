@@ -146,7 +146,7 @@
             this.database_Txt.Name = "database_Txt";
             this.database_Txt.Size = new System.Drawing.Size(164, 22);
             this.database_Txt.TabIndex = 3;
-            this.database_Txt.Text = "Hordens";
+            this.database_Txt.Text = "Horderns";
             // 
             // ConnectForm
             // 
@@ -166,7 +166,7 @@
             this.Controls.Add(this.label1);
             this.Name = "ConnectForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Connect to SQL Host";
             this.ResumeLayout(false);
             this.PerformLayout();
 
