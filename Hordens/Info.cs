@@ -34,6 +34,10 @@ namespace Hordens
         
         public static int[] estimatedTime = { 1, 2, 3, 4, 5, 6, 7, 8 };        // array of estimated time
         public static int workingHours = 8;                                    // working hours
-
+        public static DateTime[] blackoutDates = { new DateTime(2020, 1, 1), new DateTime(2020, 4, 10),
+        new DateTime(2020, 4, 13), new DateTime(2020, 5, 8), new DateTime(2020, 5, 25), new DateTime(2020, 8, 31),
+        new DateTime(2020, 12, 25), new DateTime(2020, 12, 28), new DateTime(2021, 1, 1), new DateTime(2021, 4, 2),
+        new DateTime(2021, 4, 5), new DateTime(2021, 5, 3), new DateTime(2021, 5, 31), new DateTime(2021, 8, 30),
+            new DateTime(2021, 12, 27),new DateTime(2021, 12, 28),};
     }
 }

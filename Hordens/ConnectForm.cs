@@ -46,12 +46,12 @@ namespace Hordens
                 database_Txt.Focus();
                 return;
             }
-            //string conStr = "Data Source=" + Info.hostAddress + "\\SQLEXPRESS," + Info.port +
-            //    ";Network Library=DBMSSOCN;Initial Catalog=" + Info.database +
-            //    ";User ID=" + Info.userID + ";Password=" + Info.password;
+            string conStr = "Data Source=" + Info.hostAddress + "\\SQLEXPRESS," + Info.port +
+                ";Network Library=DBMSSOCN;Initial Catalog=" + Info.database +
+                ";User ID=" + Info.userID + ";Password=" + Info.password;
 
-            string conStr = "Data Source=" + Info.hostAddress +
-                ";Integrated Security=SSPI;Initial Catalog=" + Info.database + ";";
+            //string conStr = "Data Source=" + Info.hostAddress +
+            //    ";Integrated Security=SSPI;Initial Catalog=" + Info.database + ";";
 
             // Connect to Database and get data of Booking, JobType, and Technicians
             if (DatabaseControl.ConnectToDatabase(conStr))

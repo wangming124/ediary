@@ -58,7 +58,7 @@
             this.hostAddress_Txt.Name = "hostAddress_Txt";
             this.hostAddress_Txt.Size = new System.Drawing.Size(164, 22);
             this.hostAddress_Txt.TabIndex = 1;
-            this.hostAddress_Txt.Text = "(localdb)\\MSSQLLocalDB";
+            this.hostAddress_Txt.Text = "192.168.100.34";
             // 
             // label2
             // 
@@ -77,7 +77,7 @@
             this.user_Txt.Name = "user_Txt";
             this.user_Txt.Size = new System.Drawing.Size(164, 22);
             this.user_Txt.TabIndex = 2;
-            this.user_Txt.Text = "User";
+            this.user_Txt.Text = "sa";
             // 
             // label3
             // 
@@ -97,7 +97,7 @@
             this.password_Txt.PasswordChar = '*';
             this.password_Txt.Size = new System.Drawing.Size(164, 22);
             this.password_Txt.TabIndex = 3;
-            this.password_Txt.Text = "hgy@123";
+            this.password_Txt.Text = "admin@123.com";
             // 
             // label4
             // 
