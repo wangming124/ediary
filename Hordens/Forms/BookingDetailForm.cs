@@ -25,7 +25,8 @@ namespace Hordens
         {
             jobNO_Txt.Text = booking.jobNO;
             jobType_Txt.Text = booking.jobType;
-            customer_Txt.Text = booking.customer;
+            honor_Txt.Text = booking.customer.Split(new string[] { ". " }, StringSplitOptions.None)[0];
+            customer_Txt.Text = booking.customer.Split(new string[] { ". " }, StringSplitOptions.None)[1];
             vehicleMake_Txt.Text = booking.vehicleMake;
             vehicleModel_Txt.Text = booking.vehicleModel;
             vehicleRegNo_Txt.Text = booking.vehicleRegNo;
@@ -38,7 +39,5 @@ namespace Hordens
             jobDetails_Txt.Text = booking.jobDescription;
             notes_Txt.Text = booking.notes;
         }
-
-
     }
 }

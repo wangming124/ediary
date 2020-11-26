@@ -32,6 +32,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.del_Btn = new System.Windows.Forms.Button();
             this.add_Btn = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -57,6 +58,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(5, 5);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(1440, 700);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -76,13 +78,24 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.del_Btn);
             this.panel2.Controls.Add(this.add_Btn);
             this.panel2.Controls.Add(this.dateTimePicker1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(1156, 0);
+            this.panel2.Location = new System.Drawing.Point(1067, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(294, 58);
+            this.panel2.Size = new System.Drawing.Size(383, 58);
             this.panel2.TabIndex = 2;
+            // 
+            // del_Btn
+            // 
+            this.del_Btn.Location = new System.Drawing.Point(296, 19);
+            this.del_Btn.Name = "del_Btn";
+            this.del_Btn.Size = new System.Drawing.Size(75, 23);
+            this.del_Btn.TabIndex = 2;
+            this.del_Btn.Text = "Delete";
+            this.del_Btn.UseVisualStyleBackColor = true;
+            this.del_Btn.Click += new System.EventHandler(this.del_Btn_Click);
             // 
             // add_Btn
             // 
@@ -140,5 +153,6 @@
         private System.Windows.Forms.Button add_Btn;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button del_Btn;
     }
 }

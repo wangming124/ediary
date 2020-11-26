@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Hordens
@@ -16,7 +17,7 @@ namespace Hordens
         }
 
         private void save_Btn_Click(object sender, EventArgs e)
-        {
+        {            
             // Check if Job NO is not empty
             if (jobNO_Txt.Text == "")
             {
@@ -24,6 +25,17 @@ namespace Hordens
                 jobNO_Txt.Focus();
                 return;
             }
+
+            // Check if a job No already exists in the database
+            Info.bookings = DatabaseControl.getBookings();
+            var list = Info.bookings.Where(b => b.jobNO == jobNO_Txt.Text).ToList();
+            if (list.Count > 0)
+            {
+                MessageBox.Show("The booking with Job No. " + jobNO_Txt.Text + " already exists! Please input another Job No.");
+                jobNO_Txt.Focus();
+                return;
+            }
+
             // Check if Job NO is not empty
             if (jobType_Cmb.Text == "")
             {
@@ -39,10 +51,22 @@ namespace Hordens
                 return;
             }
             // Check if an Address filed is not empty.
-            if (address_Txt.Text == "")
+            if (address1_Txt.Text == "")
             {
                 MessageBox.Show("Address field can not be empty. Please input!");
-                address_Txt.Focus();
+                address1_Txt.Focus();
+                return;
+            }
+            if (address2_Txt.Text == "")
+            {
+                MessageBox.Show("Address field can not be empty. Please input!");
+                address2_Txt.Focus();
+                return;
+            }
+            if (address3_Txt.Text == "")
+            {
+                MessageBox.Show("Address field can not be empty. Please input!");
+                address3_Txt.Focus();
                 return;
             }
             // Check if an Post Code filed is not empty.
@@ -91,8 +115,8 @@ namespace Hordens
             {
                 jobNO = jobNO_Txt.Text,
                 jobType = jobType_Cmb.Text,
-                customer = customer_Txt.Text,
-                address = address_Txt.Text,
+                customer = honor_Cmb.Text + ". " + customer_Txt.Text,
+                address = address1_Txt.Text + ", " + address2_Txt.Text + ", " + address3_Txt.Text,
                 postCode = postCode_Txt.Text,
                 email = email_Txt.Text,
                 tel = tel_Txt.Text,
@@ -109,8 +133,12 @@ namespace Hordens
                 jobDescription = jobDescription_Txt.Text,
                 notes = notes_Txt.Text
             };
-            UIControl.bookingGridForm.addBooking(newBooking);
-            clearFields();
+            if (DatabaseControl.addBooking(newBooking))
+            {
+                MessageBox.Show("New booking has been added succesfully!");
+                UIControl.bookingGridForm.showBookings();
+                clearFields();
+            }
         }
 
         // Initialize list of "Job Types" and "Estimated Time" when loading this form
@@ -133,7 +161,9 @@ namespace Hordens
             if (jobType_Cmb.Items.Count > 0)
                 jobType_Cmb.SelectedIndex = 0;
             customer_Txt.Text = "";
-            address_Txt.Text = "";
+            address1_Txt.Text = "";
+            address2_Txt.Text = "";
+            address3_Txt.Text = "";
             postCode_Txt.Text = "";
             email_Txt.Text = "";
             tel_Txt.Text = "";
@@ -146,10 +176,33 @@ namespace Hordens
             timeIn_Dt.Value = DateTime.Now;
             timeOut_Dt.Value = DateTime.Now;
             estimatedTime_Cmb.SelectedIndex = 0;
-            insurance_Cmb.SelectedIndex = 0;
+            insurance_Cmb.SelectedIndex = 1;
             jobDescription_Txt.Text = "";
             notes_Txt.Text = "";
         }
 
+        public void updateJobTypes()
+        {
+            Info.jobTypes = DatabaseControl.getJobTypes();
+            jobType_Cmb.Items.Clear();
+            foreach(JobType job in Info.jobTypes)
+            {
+                jobType_Cmb.Items.Add(job.typeName);
+            }
+            jobType_Cmb.Text = "";
+        }
+
+        private void loanCar_Cmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // If selected "Loan Car"
+            if (loanCar_Cmb.SelectedIndex == 3)
+            {
+                insurance_Cmb.SelectedIndex = 0;
+            }
+            else
+            {
+                insurance_Cmb.SelectedIndex = 1;
+            }
+        }
     }
 }

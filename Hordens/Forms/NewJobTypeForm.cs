@@ -57,8 +57,14 @@ namespace Hordens
                 background = background_Lbl.Text
             };
 
-            UIControl.jobTypesGridForm.addJobType(newJobType);
-            clearFields();
+            if (DatabaseControl.addJobType(newJobType))
+            {
+                MessageBox.Show("New Job Type has been added succesfully!");
+                UIControl.newBookingForm.updateJobTypes();
+                UIControl.editBookingForm.updateJobTypes();
+                UIControl.jobTypesGridForm.showJobTypes();
+                clearFields();
+            }
         }
 
         private void cancel_Btn_Click(object sender, EventArgs e)

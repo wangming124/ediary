@@ -51,6 +51,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.honor_Txt = new System.Windows.Forms.TextBox();
             this.loanCar_Txt = new System.Windows.Forms.TextBox();
             this.vehicleModel_Txt = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -90,7 +91,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(485, 84);
+            this.label9.Location = new System.Drawing.Point(485, 47);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(65, 16);
             this.label9.TabIndex = 0;
@@ -100,7 +101,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(495, 55);
+            this.label7.Location = new System.Drawing.Point(495, 18);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(55, 16);
             this.label7.TabIndex = 0;
@@ -141,7 +142,7 @@
             this.vehicleRegNo_Txt.Location = new System.Drawing.Point(174, 162);
             this.vehicleRegNo_Txt.Name = "vehicleRegNo_Txt";
             this.vehicleRegNo_Txt.ReadOnly = true;
-            this.vehicleRegNo_Txt.Size = new System.Drawing.Size(174, 22);
+            this.vehicleRegNo_Txt.Size = new System.Drawing.Size(118, 22);
             this.vehicleRegNo_Txt.TabIndex = 1;
             // 
             // label3
@@ -167,7 +168,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(472, 110);
+            this.label10.Location = new System.Drawing.Point(472, 73);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(78, 16);
             this.label10.TabIndex = 0;
@@ -177,7 +178,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(423, 168);
+            this.label12.Location = new System.Drawing.Point(423, 131);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(128, 16);
             this.label12.TabIndex = 0;
@@ -187,7 +188,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(445, 140);
+            this.label11.Location = new System.Drawing.Point(445, 103);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(105, 16);
             this.label11.TabIndex = 0;
@@ -206,7 +207,7 @@
             // estimatedTime_Txt
             // 
             this.estimatedTime_Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.estimatedTime_Txt.Location = new System.Drawing.Point(556, 137);
+            this.estimatedTime_Txt.Location = new System.Drawing.Point(556, 100);
             this.estimatedTime_Txt.Name = "estimatedTime_Txt";
             this.estimatedTime_Txt.ReadOnly = true;
             this.estimatedTime_Txt.Size = new System.Drawing.Size(174, 22);
@@ -215,10 +216,10 @@
             // customer_Txt
             // 
             this.customer_Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customer_Txt.Location = new System.Drawing.Point(174, 75);
+            this.customer_Txt.Location = new System.Drawing.Point(227, 75);
             this.customer_Txt.Name = "customer_Txt";
             this.customer_Txt.ReadOnly = true;
-            this.customer_Txt.Size = new System.Drawing.Size(174, 22);
+            this.customer_Txt.Size = new System.Drawing.Size(121, 22);
             this.customer_Txt.TabIndex = 1;
             // 
             // label5
@@ -256,9 +257,9 @@
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(88, 213);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(79, 16);
+            this.label13.Size = new System.Drawing.Size(72, 16);
             this.label13.TabIndex = 0;
-            this.label13.Text = "Job Details:";
+            this.label13.Text = "Work Title:";
             // 
             // label6
             // 
@@ -274,15 +275,16 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(486, 23);
+            this.label8.Location = new System.Drawing.Point(486, 159);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(65, 16);
+            this.label8.Size = new System.Drawing.Size(66, 16);
             this.label8.TabIndex = 0;
-            this.label8.Text = "Loan Car:";
+            this.label8.Text = "Requires:";
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.honor_Txt);
             this.panel1.Controls.Add(this.id_Lbl);
             this.panel1.Controls.Add(this.backToList_Btn);
             this.panel1.Controls.Add(this.label9);
@@ -319,10 +321,19 @@
             this.panel1.Size = new System.Drawing.Size(870, 554);
             this.panel1.TabIndex = 10;
             // 
+            // honor_Txt
+            // 
+            this.honor_Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.honor_Txt.Location = new System.Drawing.Point(174, 74);
+            this.honor_Txt.Name = "honor_Txt";
+            this.honor_Txt.ReadOnly = true;
+            this.honor_Txt.Size = new System.Drawing.Size(47, 22);
+            this.honor_Txt.TabIndex = 8;
+            // 
             // loanCar_Txt
             // 
             this.loanCar_Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loanCar_Txt.Location = new System.Drawing.Point(556, 20);
+            this.loanCar_Txt.Location = new System.Drawing.Point(556, 156);
             this.loanCar_Txt.Name = "loanCar_Txt";
             this.loanCar_Txt.ReadOnly = true;
             this.loanCar_Txt.Size = new System.Drawing.Size(89, 22);
@@ -334,7 +345,7 @@
             this.vehicleModel_Txt.Location = new System.Drawing.Point(174, 133);
             this.vehicleModel_Txt.Name = "vehicleModel_Txt";
             this.vehicleModel_Txt.ReadOnly = true;
-            this.vehicleModel_Txt.Size = new System.Drawing.Size(174, 22);
+            this.vehicleModel_Txt.Size = new System.Drawing.Size(118, 22);
             this.vehicleModel_Txt.TabIndex = 1;
             // 
             // label16
@@ -350,7 +361,7 @@
             // insurance_Txt
             // 
             this.insurance_Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.insurance_Txt.Location = new System.Drawing.Point(556, 165);
+            this.insurance_Txt.Location = new System.Drawing.Point(556, 128);
             this.insurance_Txt.Name = "insurance_Txt";
             this.insurance_Txt.ReadOnly = true;
             this.insurance_Txt.Size = new System.Drawing.Size(80, 22);
@@ -359,7 +370,7 @@
             // bookedBy_Txt
             // 
             this.bookedBy_Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bookedBy_Txt.Location = new System.Drawing.Point(556, 109);
+            this.bookedBy_Txt.Location = new System.Drawing.Point(556, 72);
             this.bookedBy_Txt.Name = "bookedBy_Txt";
             this.bookedBy_Txt.ReadOnly = true;
             this.bookedBy_Txt.Size = new System.Drawing.Size(174, 22);
@@ -368,7 +379,7 @@
             // timeOut_Txt
             // 
             this.timeOut_Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeOut_Txt.Location = new System.Drawing.Point(556, 81);
+            this.timeOut_Txt.Location = new System.Drawing.Point(556, 44);
             this.timeOut_Txt.Name = "timeOut_Txt";
             this.timeOut_Txt.ReadOnly = true;
             this.timeOut_Txt.Size = new System.Drawing.Size(174, 22);
@@ -377,7 +388,7 @@
             // timeIn_Txt
             // 
             this.timeIn_Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeIn_Txt.Location = new System.Drawing.Point(556, 52);
+            this.timeIn_Txt.Location = new System.Drawing.Point(556, 15);
             this.timeIn_Txt.Name = "timeIn_Txt";
             this.timeIn_Txt.ReadOnly = true;
             this.timeIn_Txt.Size = new System.Drawing.Size(174, 22);
@@ -453,5 +464,6 @@
         private System.Windows.Forms.TextBox jobNO_Txt;
         private System.Windows.Forms.TextBox vehicleModel_Txt;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox honor_Txt;
     }
 }

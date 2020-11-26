@@ -33,6 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.del_Btn = new System.Windows.Forms.Button();
             this.add_Btn = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,17 +62,28 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.del_Btn);
             this.panel2.Controls.Add(this.add_Btn);
             this.panel2.Controls.Add(this.dateTimePicker1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(1006, 0);
+            this.panel2.Location = new System.Drawing.Point(902, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(294, 60);
+            this.panel2.Size = new System.Drawing.Size(398, 60);
             this.panel2.TabIndex = 2;
+            // 
+            // del_Btn
+            // 
+            this.del_Btn.Location = new System.Drawing.Point(311, 18);
+            this.del_Btn.Name = "del_Btn";
+            this.del_Btn.Size = new System.Drawing.Size(75, 23);
+            this.del_Btn.TabIndex = 1;
+            this.del_Btn.Text = "Delete";
+            this.del_Btn.UseVisualStyleBackColor = true;
+            this.del_Btn.Click += new System.EventHandler(this.del_Btn_Click);
             // 
             // add_Btn
             // 
-            this.add_Btn.Location = new System.Drawing.Point(209, 18);
+            this.add_Btn.Location = new System.Drawing.Point(230, 18);
             this.add_Btn.Name = "add_Btn";
             this.add_Btn.Size = new System.Drawing.Size(75, 23);
             this.add_Btn.TabIndex = 1;
@@ -97,7 +109,7 @@
             this.label1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.label1.Size = new System.Drawing.Size(180, 60);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Booking Grid";
+            this.label1.Text = "Booking Diary";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // dataGridView1
@@ -130,10 +142,12 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1290, 649);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             this.dataGridView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseDoubleClick);
             // 
             // panel3
@@ -215,5 +229,6 @@
         private System.Windows.Forms.Panel panel4;
         private MaterialSkin.Controls.MaterialRaisedButton print_Btn;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button del_Btn;
     }
 }

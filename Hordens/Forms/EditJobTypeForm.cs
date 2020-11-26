@@ -21,6 +21,7 @@ namespace Hordens
         {
             name_Txt.Text = jobTypeToEdit.typeName;
             background_Lbl.Text = jobTypeToEdit.background;
+            background_Lbl.BackColor = ColorTranslator.FromHtml(background_Lbl.Text);
         }
         private void save_Btn_Click(object sender, EventArgs e)
         {
@@ -35,8 +36,15 @@ namespace Hordens
             jobTypeToEdit.typeName = name_Txt.Text;
             jobTypeToEdit.background = background_Lbl.Text;
 
-            UIControl.jobTypesGridForm.updateJobType(jobTypeToEdit);
-            UIControl.showForm(UIControl.jobTypesGridForm);
+            if (DatabaseControl.updateJobType(jobTypeToEdit))
+            {
+                MessageBox.Show("Job type data has been updated successfuly!");
+                UIControl.newBookingForm.updateJobTypes();
+                UIControl.editBookingForm.updateJobTypes();
+                UIControl.bookingGridForm.updateColumnColor();
+                UIControl.jobTypesGridForm.showJobTypes();
+                UIControl.showForm(UIControl.jobTypesGridForm);
+            }
         }
 
         private void cancel_Btn_Click(object sender, EventArgs e)

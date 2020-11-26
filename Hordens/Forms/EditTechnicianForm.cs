@@ -53,8 +53,12 @@ namespace Hordens
             technicianToEdit.workingHours = Convert.ToDouble(workingHours_Txt.Text);
             technicianToEdit.date = dateTimePicker1.Value;
 
-            UIControl.technicianGridForm.updateTechnician(technicianToEdit);
-            UIControl.showForm(UIControl.technicianGridForm);
+            if (DatabaseControl.updateTechnician(technicianToEdit))
+            {
+                MessageBox.Show("Technician data has been updated successfully!");
+                UIControl.technicianGridForm.showTechnicians();
+                UIControl.showForm(UIControl.technicianGridForm);
+            }
         }
 
         private void cancel_Btn_Click(object sender, EventArgs e)

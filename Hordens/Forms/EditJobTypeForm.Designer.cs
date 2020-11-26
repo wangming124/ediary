@@ -67,7 +67,7 @@
             this.cancel_Btn.Location = new System.Drawing.Point(136, 7);
             this.cancel_Btn.Name = "cancel_Btn";
             this.cancel_Btn.Size = new System.Drawing.Size(104, 34);
-            this.cancel_Btn.TabIndex = 20;
+            this.cancel_Btn.TabIndex = 4;
             this.cancel_Btn.Text = "Cancel";
             this.cancel_Btn.UseVisualStyleBackColor = true;
             this.cancel_Btn.Click += new System.EventHandler(this.cancel_Btn_Click);
@@ -78,7 +78,7 @@
             this.save_Btn.Location = new System.Drawing.Point(13, 7);
             this.save_Btn.Name = "save_Btn";
             this.save_Btn.Size = new System.Drawing.Size(104, 34);
-            this.save_Btn.TabIndex = 21;
+            this.save_Btn.TabIndex = 3;
             this.save_Btn.Text = "Save";
             this.save_Btn.UseVisualStyleBackColor = true;
             this.save_Btn.Click += new System.EventHandler(this.save_Btn_Click);
@@ -130,7 +130,7 @@
             this.background_Lbl.Location = new System.Drawing.Point(126, 130);
             this.background_Lbl.Name = "background_Lbl";
             this.background_Lbl.Size = new System.Drawing.Size(174, 23);
-            this.background_Lbl.TabIndex = 30;
+            this.background_Lbl.TabIndex = 2;
             this.background_Lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.background_Lbl.Click += new System.EventHandler(this.background_Lbl_Click);
             // 

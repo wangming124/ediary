@@ -34,6 +34,7 @@
             this.add_Btn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.del_Btn = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -60,7 +61,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 58);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(5);
-            this.panel3.Size = new System.Drawing.Size(1394, 710);
+            this.panel3.Size = new System.Drawing.Size(1386, 710);
             this.panel3.TabIndex = 8;
             // 
             // dataGridView1
@@ -69,9 +70,11 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(5, 5);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1384, 700);
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(1376, 700);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             // 
             // add_Btn
             // 
@@ -90,23 +93,34 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1394, 58);
+            this.panel1.Size = new System.Drawing.Size(1386, 58);
             this.panel1.TabIndex = 7;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.del_Btn);
             this.panel2.Controls.Add(this.add_Btn);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(1281, 0);
+            this.panel2.Location = new System.Drawing.Point(1189, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(113, 58);
+            this.panel2.Size = new System.Drawing.Size(197, 58);
             this.panel2.TabIndex = 2;
+            // 
+            // del_Btn
+            // 
+            this.del_Btn.Location = new System.Drawing.Point(110, 21);
+            this.del_Btn.Name = "del_Btn";
+            this.del_Btn.Size = new System.Drawing.Size(75, 23);
+            this.del_Btn.TabIndex = 3;
+            this.del_Btn.Text = "Delete";
+            this.del_Btn.UseVisualStyleBackColor = true;
+            this.del_Btn.Click += new System.EventHandler(this.del_Btn_Click);
             // 
             // JobTypesGridForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1394, 768);
+            this.ClientSize = new System.Drawing.Size(1386, 768);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -129,5 +143,6 @@
         private System.Windows.Forms.Button add_Btn;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button del_Btn;
     }
 }
