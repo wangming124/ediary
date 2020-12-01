@@ -136,3 +136,4 @@ F:\workshop\HongKey\11\02(E-Diary)\Hordens 01-12-2020\Hordens\obj\Debug\Hordens.
 F:\workshop\HongKey\11\02(E-Diary)\Hordens 01-12-2020\Hordens\obj\Debug\Hordens.csproj.CopyComplete
 F:\workshop\HongKey\11\02(E-Diary)\Hordens 01-12-2020\Hordens\obj\Debug\Hordens.exe
 F:\workshop\HongKey\11\02(E-Diary)\Hordens 01-12-2020\Hordens\obj\Debug\Hordens.pdb
+F:\workshop\HongKey\11\02(E-Diary)\Hordens 01-12-2020\Hordens\obj\Debug\Hordens.csprojAssemblyReference.cache

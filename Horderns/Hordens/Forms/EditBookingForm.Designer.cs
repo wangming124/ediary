@@ -34,8 +34,6 @@
             this.label35 = new System.Windows.Forms.Label();
             this.servicePlan_Cmb = new System.Windows.Forms.ComboBox();
             this.existingCustomer_Cmb = new System.Windows.Forms.ComboBox();
-            this.timeOut_Txt = new System.Windows.Forms.TextBox();
-            this.timeIn_Txt = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
@@ -66,6 +64,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.notes_Txt = new System.Windows.Forms.TextBox();
             this.jobDescription_Txt = new System.Windows.Forms.TextBox();
+            this.estimatedTime_Txt = new System.Windows.Forms.TextBox();
             this.vehicleRegNo_Txt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.vehicleModel_Txt = new System.Windows.Forms.TextBox();
@@ -83,7 +82,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.estimatedTime_Txt = new System.Windows.Forms.TextBox();
+            this.timeOut_Cmb = new System.Windows.Forms.ComboBox();
+            this.timeIn_Cmb = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,12 +101,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.timeOut_Cmb);
+            this.panel1.Controls.Add(this.timeIn_Cmb);
             this.panel1.Controls.Add(this.mileage_Txt);
             this.panel1.Controls.Add(this.label35);
             this.panel1.Controls.Add(this.servicePlan_Cmb);
             this.panel1.Controls.Add(this.existingCustomer_Cmb);
-            this.panel1.Controls.Add(this.timeOut_Txt);
-            this.panel1.Controls.Add(this.timeIn_Txt);
             this.panel1.Controls.Add(this.label28);
             this.panel1.Controls.Add(this.label26);
             this.panel1.Controls.Add(this.label24);
@@ -200,24 +200,6 @@
             this.existingCustomer_Cmb.Size = new System.Drawing.Size(200, 21);
             this.existingCustomer_Cmb.TabIndex = 3;
             this.existingCustomer_Cmb.SelectedIndexChanged += new System.EventHandler(this.existingCustomer_Cmb_SelectedIndexChanged);
-            // 
-            // timeOut_Txt
-            // 
-            this.timeOut_Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeOut_Txt.Location = new System.Drawing.Point(687, 192);
-            this.timeOut_Txt.Name = "timeOut_Txt";
-            this.timeOut_Txt.Size = new System.Drawing.Size(121, 22);
-            this.timeOut_Txt.TabIndex = 16;
-            this.timeOut_Txt.Leave += new System.EventHandler(this.timeOut_Txt_Leave);
-            // 
-            // timeIn_Txt
-            // 
-            this.timeIn_Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeIn_Txt.Location = new System.Drawing.Point(687, 164);
-            this.timeIn_Txt.Name = "timeIn_Txt";
-            this.timeIn_Txt.Size = new System.Drawing.Size(121, 22);
-            this.timeIn_Txt.TabIndex = 15;
-            this.timeIn_Txt.Leave += new System.EventHandler(this.timeIn_Txt_Leave);
             // 
             // label28
             // 
@@ -526,6 +508,14 @@
             this.jobDescription_Txt.Size = new System.Drawing.Size(666, 22);
             this.jobDescription_Txt.TabIndex = 21;
             // 
+            // estimatedTime_Txt
+            // 
+            this.estimatedTime_Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.estimatedTime_Txt.Location = new System.Drawing.Point(687, 250);
+            this.estimatedTime_Txt.Name = "estimatedTime_Txt";
+            this.estimatedTime_Txt.Size = new System.Drawing.Size(121, 22);
+            this.estimatedTime_Txt.TabIndex = 14;
+            // 
             // vehicleRegNo_Txt
             // 
             this.vehicleRegNo_Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -686,13 +676,77 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Requires:";
             // 
-            // estimatedTime_Txt
+            // timeOut_Cmb
             // 
-            this.estimatedTime_Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.estimatedTime_Txt.Location = new System.Drawing.Point(687, 250);
-            this.estimatedTime_Txt.Name = "estimatedTime_Txt";
-            this.estimatedTime_Txt.Size = new System.Drawing.Size(121, 22);
-            this.estimatedTime_Txt.TabIndex = 14;
+            this.timeOut_Cmb.FormattingEnabled = true;
+            this.timeOut_Cmb.ItemHeight = 13;
+            this.timeOut_Cmb.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24"});
+            this.timeOut_Cmb.Location = new System.Drawing.Point(687, 192);
+            this.timeOut_Cmb.Name = "timeOut_Cmb";
+            this.timeOut_Cmb.Size = new System.Drawing.Size(121, 21);
+            this.timeOut_Cmb.TabIndex = 42;
+            this.timeOut_Cmb.SelectedIndexChanged += new System.EventHandler(this.timeOut_Cmb_SelectedIndexChanged);
+            // 
+            // timeIn_Cmb
+            // 
+            this.timeIn_Cmb.FormattingEnabled = true;
+            this.timeIn_Cmb.ItemHeight = 13;
+            this.timeIn_Cmb.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24"});
+            this.timeIn_Cmb.Location = new System.Drawing.Point(687, 165);
+            this.timeIn_Cmb.Name = "timeIn_Cmb";
+            this.timeIn_Cmb.Size = new System.Drawing.Size(121, 21);
+            this.timeIn_Cmb.TabIndex = 43;
+            this.timeIn_Cmb.SelectedIndexChanged += new System.EventHandler(this.timeIn_Cmb_SelectedIndexChanged);
             // 
             // EditBookingForm
             // 
@@ -759,8 +813,6 @@
         private System.Windows.Forms.TextBox address3_Txt;
         private System.Windows.Forms.TextBox address2_Txt;
         private System.Windows.Forms.TextBox address1_Txt;
-        private System.Windows.Forms.TextBox timeOut_Txt;
-        private System.Windows.Forms.TextBox timeIn_Txt;
         private System.Windows.Forms.ComboBox existingCustomer_Cmb;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
@@ -769,5 +821,7 @@
         private System.Windows.Forms.TextBox mileage_Txt;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.TextBox estimatedTime_Txt;
+        private System.Windows.Forms.ComboBox timeOut_Cmb;
+        private System.Windows.Forms.ComboBox timeIn_Cmb;
     }
 }

@@ -42,10 +42,10 @@ namespace Hordens
             vehicleMake_Txt.Text = bookingToEdit.vehicleMake;
             vehicleModel_Txt.Text = bookingToEdit.vehicleModel;
             vehicleRegNo_Txt.Text = bookingToEdit.vehicleRegNo;
-            mileage_Txt.Text = string.Format("{0:###,###.00}", double.Parse(bookingToEdit.mileage.ToString())); ;
+            mileage_Txt.Text = string.Format("{0:###,###}", double.Parse(bookingToEdit.mileage.ToString())); ;
             loanCar_Cmb.Text = bookingToEdit.loanCar;
-            timeIn_Txt.Text = bookingToEdit.timeIn.ToString();
-            timeOut_Txt.Text = bookingToEdit.timeOut.ToString();
+            timeIn_Cmb.Text = bookingToEdit.timeIn.ToString();
+            timeOut_Cmb.Text = bookingToEdit.timeOut.ToString();
             bookedBy_Cmb.Text = bookingToEdit.bookedBy;
             estimatedTime_Txt.Text = bookingToEdit.estimatedTime.ToString();
             insurance_Cmb.Text = bookingToEdit.insuranceRequired;
@@ -137,29 +137,13 @@ namespace Hordens
                 MessageBox.Show("Work Title field can not be empty. Please input!");
                 jobDescription_Txt.Focus();
                 return;
-            }
-            // Check if a timeIn is valid number
-            double d;
-            if (!double.TryParse(timeIn_Txt.Text, out d))
-            {
-                MessageBox.Show("Time in should be numeric value. Please input!");
-                timeIn_Txt.Text = "0";
-                timeIn_Txt.Focus();
-                return;
-            }
+            }            
 
-            if (!double.TryParse(timeOut_Txt.Text, out d))
-            {
-                MessageBox.Show("Time in should be numeric value. Please input!");
-                timeOut_Txt.Text = "0";
-                timeOut_Txt.Focus();
-                return;
-            }
             // Compare Time in and Time Out
-            if (Convert.ToDouble(timeIn_Txt.Text) > Convert.ToDouble(timeOut_Txt.Text))
+            if (Convert.ToDouble(timeIn_Cmb.Text) > Convert.ToDouble(timeOut_Cmb.Text))
             {
                 MessageBox.Show("Time in should be less than Time Out!");
-                timeIn_Txt.Focus();
+                timeIn_Cmb.Focus();
                 return;
             }
 
@@ -193,8 +177,8 @@ namespace Hordens
             bookingToEdit.vehicleRegNo = vehicleRegNo_Txt.Text;
             bookingToEdit.mileage = Convert.ToDouble(mileage_Txt.Text);
             bookingToEdit.loanCar = loanCar_Cmb.Text;
-            bookingToEdit.timeIn = Convert.ToDouble(timeIn_Txt.Text);
-            bookingToEdit.timeOut = Convert.ToDouble(timeOut_Txt.Text);
+            bookingToEdit.timeIn = Convert.ToDouble(timeIn_Cmb.Text);
+            bookingToEdit.timeOut = Convert.ToDouble(timeOut_Cmb.Text);
             
             bookingToEdit.bookedBy = bookedBy_Cmb.Text;
             bookingToEdit.estimatedTime = bookingToEdit.timeOut - bookingToEdit.timeIn;
@@ -297,7 +281,7 @@ namespace Hordens
         {
             try
             {
-                mileage_Txt.Text = string.Format("{0:###,###.00}", double.Parse(mileage_Txt.Text));
+                mileage_Txt.Text = string.Format("{0:###,###}", double.Parse(mileage_Txt.Text));
             }
             catch (Exception ex)
             {
@@ -308,33 +292,17 @@ namespace Hordens
 
         private void setTimeRemaining()
         {
-            estimatedTime_Txt.Text = (Convert.ToDouble(timeOut_Txt.Text) - Convert.ToDouble(timeIn_Txt.Text)).ToString();
+            if (timeOut_Cmb.Text != "" && timeIn_Cmb.Text != "")
+                estimatedTime_Txt.Text = (Convert.ToDouble(timeOut_Cmb.Text) - Convert.ToDouble(timeIn_Cmb.Text)).ToString();
         }
 
-        private void timeIn_Txt_Leave(object sender, EventArgs e)
+        private void timeIn_Cmb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Check if a timeIn is valid number
-            double d;
-            if (!double.TryParse(timeIn_Txt.Text, out d))
-            {
-                MessageBox.Show("Time in should be numeric value. Please input!");
-                timeIn_Txt.Text = "0";
-                timeIn_Txt.Focus();
-                return;
-            }
             setTimeRemaining();
         }
 
-        private void timeOut_Txt_Leave(object sender, EventArgs e)
+        private void timeOut_Cmb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            double d;
-            if (!double.TryParse(timeOut_Txt.Text, out d))
-            {
-                MessageBox.Show("Time in should be numeric value. Please input!");
-                timeOut_Txt.Text = "0";
-                timeOut_Txt.Focus();
-                return;
-            }
             setTimeRemaining();
         }
     }   

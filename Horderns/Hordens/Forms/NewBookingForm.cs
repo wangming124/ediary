@@ -129,12 +129,11 @@ namespace Hordens
                 return;
             }
             
-
             // Compare Time in and Time Out
-            if (Convert.ToDouble(timeIn_Txt.Text) > Convert.ToDouble(timeOut_Txt.Text))
+            if (Convert.ToDouble(timeIn_Cmb.Text) > Convert.ToDouble(timeOut_Cmb.Text))
             {
                 MessageBox.Show("Time in should be less than Time Out!");
-                timeIn_Txt.Focus();
+                timeIn_Cmb.Focus();
                 return;
             }
 
@@ -161,7 +160,7 @@ namespace Hordens
                 customerId = Info.customers[existingCustomer_Cmb.SelectedIndex - 1].id;
                 DatabaseControl.updateCustomer(customer, customerId);
             }
-            double estimatedTime = Convert.ToDouble(timeOut_Txt.Text) - Convert.ToDouble(timeIn_Txt.Text);
+            double estimatedTime = Convert.ToDouble(timeOut_Cmb.Text) - Convert.ToDouble(timeIn_Cmb.Text);
             double timeRemaining = DatabaseControl.getBookingDates(DateTime.Now.Date) - estimatedTime;
             if (timeRemaining < 0)
                 timeRemaining = 0;
@@ -176,8 +175,8 @@ namespace Hordens
                 vehicleRegNo = vehicleRegNo_Txt.Text,
                 mileage = Convert.ToDouble(mileage_Txt.Text),
                 loanCar = loanCar_Cmb.Text,
-                timeIn = Convert.ToDouble(timeIn_Txt.Text),
-                timeOut = Convert.ToDouble(timeOut_Txt.Text),
+                timeIn = Convert.ToDouble(timeIn_Cmb.Text),
+                timeOut = Convert.ToDouble(timeOut_Cmb.Text),
                 bookedBy = bookedBy_Txt.Text,
                 estimatedTime = estimatedTime,
                 timeRemaining = timeRemaining,
@@ -215,8 +214,8 @@ namespace Hordens
             mileage_Txt.Text = "0";
             loanCar_Cmb.SelectedIndex = 0;
             bookedBy_Txt.Text = Info.userID;
-            timeIn_Txt.Text = "0";
-            timeOut_Txt.Text = "0";
+            timeIn_Cmb.Text = "0";
+            timeOut_Cmb.Text = "0";
             estimatedTime_Txt.Text = "0";
             insurance_Cmb.SelectedIndex = 1;
             jobDescription_Txt.Text = "";
@@ -291,49 +290,33 @@ namespace Hordens
             }
         }
 
-        private void timeIn_Txt_TextChanged(object sender, EventArgs e)
-        {
-            // Check if a timeIn is valid number
-            double d;
-            if (!double.TryParse(timeIn_Txt.Text, out d))
-            {
-                MessageBox.Show("Time in should be numeric value. Please input!");
-                timeIn_Txt.Text = "0";
-                timeIn_Txt.Focus();
-                return;
-            }
-            setTimeRemaining();
-        }
-
-        private void timeOut_Txt_TextChanged(object sender, EventArgs e)
-        {
-            double d;
-            if (!double.TryParse(timeOut_Txt.Text, out d))
-            {
-                MessageBox.Show("Time in should be numeric value. Please input!");
-                timeOut_Txt.Text = "0";
-                timeOut_Txt.Focus();
-                return;
-            }
-            setTimeRemaining();
-        }
-
         private void setTimeRemaining()
         {
-            estimatedTime_Txt.Text = (Convert.ToDouble(timeOut_Txt.Text) - Convert.ToDouble(timeIn_Txt.Text)).ToString();
+            if (timeOut_Cmb.Text != "" && timeIn_Cmb.Text != "")
+                estimatedTime_Txt.Text = (Convert.ToDouble(timeOut_Cmb.Text) - Convert.ToDouble(timeIn_Cmb.Text)).ToString();
         }
 
         private void mileage_Txt_Leave(object sender, EventArgs e)
         {
             try
             {
-                mileage_Txt.Text = string.Format("{0:###,###.00}", double.Parse(mileage_Txt.Text));
+                mileage_Txt.Text = string.Format("{0:###,###}", double.Parse(mileage_Txt.Text));
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Invalid number format!");
                 mileage_Txt.Text = "0";
             }
+        }
+
+        private void timeIn_Cmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            setTimeRemaining();
+        }
+
+        private void timeOut_Cmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            setTimeRemaining();
         }
     }
 }
