@@ -1,12 +1,18 @@
 ﻿
 /*  Define Job Types  */
+using System.Data.Linq.Mapping;
+
 namespace Hordens
 {
+    [Table(Name = "jobtype")]
     public class JobType
     {
-        public int id { get; set; }             // Job ID
-        public string typeName { get; set; }   // Job Type Name
-        public string background { get; set; } // Background color
+        [Column(Name = "id", IsPrimaryKey = true, IsDbGenerated = true)]
+        public int id { get; set; }
+        [Column(Name = "type_name", CanBeNull = false)]
+        public string typeName { get; set; }
+        [Column(Name = "background", CanBeNull = false)]
+        public string background { get; set; }
         
     }
 }

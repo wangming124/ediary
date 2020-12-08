@@ -27,6 +27,8 @@ namespace Hordens
             public string bookedBy { get; set; }
             public string loanCar { get; set; }
             public double timeRemaining { get; set; }
+            public DateTime timeIn { get; set; }
+            public DateTime timeOut { get; set; }
             public DateTime bookingDate { get; set; }
         }
 
@@ -38,6 +40,7 @@ namespace Hordens
         }
         private void BookingGridForm_Load(object sender, EventArgs e)
         {
+            
             showBookings();
             dataGridView1.Columns[1].HeaderText = "Job NO";
             dataGridView1.Columns[2].HeaderText = "Job Type";
@@ -49,7 +52,10 @@ namespace Hordens
             dataGridView1.Columns[7].HeaderText = "Booked By";
             dataGridView1.Columns[8].HeaderText = "Requires";
             dataGridView1.Columns[9].HeaderText = "Time Remaining";
-            //dataGridView1.Columns[9].DefaultCellStyle.Format = "HH:mm";
+            dataGridView1.Columns[10].HeaderText = "Time In";
+            dataGridView1.Columns[11].HeaderText = "Time Required";
+            dataGridView1.Columns[10].DefaultCellStyle.Format = "HH:mm";
+            dataGridView1.Columns[11].DefaultCellStyle.Format = "HH:mm";
             // Add Edit button column in datagridview
             DataGridViewButtonColumn editCol = new DataGridViewButtonColumn();
             editCol.Name = "dataGridViewEditButton";
@@ -65,8 +71,8 @@ namespace Hordens
             dataGridView1.Columns[3].Width = 150;
             dataGridView1.Columns[4].Width = 70;
             dataGridView1.Columns[5].Width = 70;
-            dataGridView1.Columns[6].Width = 500;
-            dataGridView1.Columns[10].Visible = false;
+            dataGridView1.Columns[6].Width = 430;
+            dataGridView1.Columns[12].Visible = false;
             dataGridView1.Columns["dataGridViewEditButton"].Width = 50;
             dataGridView1.AllowUserToAddRows = false;
 
@@ -79,34 +85,37 @@ namespace Hordens
         // Show booking grid with booking list from SQL Table
         public void showBookings()
         {
-            workingHours_Txt.Text = DatabaseControl.getBookingDates(dateTimePicker1.Value.Date).ToString();
+            workingHours_Txt.Text = DatabaseControl.getHoursOfBookingDate(dateTimePicker1.Value.Date).ToString();
             note_Txt.Text = DatabaseControl.getBookingNote(dateTimePicker1.Value.Date);
+            double workingHours = DatabaseControl.getHoursOfBookingDate(dateTimePicker1.Value.Date);
             BindingSource bs = new BindingSource();
-            Info.bookings = DatabaseControl.getBookings();
-            Info.customers = DatabaseControl.getCustomers();
-            List<Booking> bookings = Info.bookings.Where(b => b.bookingDate.Date == dateTimePicker1.Value.Date).ToList();
+            GData.bookings = DatabaseControl.getBookings();
+            GData.customers = DatabaseControl.getCustomers();
+            List<Booking> bookings = GData.bookings.Where(b => b.bookingDate.Date == dateTimePicker1.Value.Date).ToList();
             foreach (Booking booking in bookings)
             {
-                booking.estimatedTime = booking.timeOut - booking.timeIn;
-                booking.timeRemaining = Convert.ToDouble(workingHours_Txt.Text) - booking.estimatedTime;
-                if (booking.timeRemaining < 0)
-                    booking.timeRemaining = 0;
+                //booking.estimatedTime = booking.timeOut - booking.timeIn;
+                booking.timeRemaining = workingHours - booking.estimatedTime;
+                workingHours -= booking.estimatedTime;
             }
             bs.DataSource = bookings.Select(b => new FilteredBooking()
             {
                 id = b.id,
                 jobNO = b.jobNO,
                 jobType = b.jobType,
-                customerName = Info.customers.Where(c => c.id == b.customerID).ToList()[0].name,
+                customerName = GData.customers.Where(c => c.id == b.customerID).ToList()[0].name,
                 vehicleModel = b.vehicleModel,
-                regNo = b.vehicleRegNo,
+                regNo = b.regNo,
                 bookedBy = b.bookedBy,
                 loanCar = b.loanCar,
                 jobDescription = b.jobDescription,
                 timeRemaining = b.timeRemaining,
+                timeIn = b.timeIn,
+                timeOut = b.timeOut,
                 bookingDate = b.bookingDate
             }).ToList();
             dataGridView1.DataSource = bs;
+            
         }
         private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
@@ -120,9 +129,11 @@ namespace Hordens
                 var jobType = row.Cells["jobType"].Value;
                 if (jobType != null)
                 {
-                    string background = Info.jobTypes.Where(j => j.typeName == jobType.ToString()).ToList()[0].background;
+                    string background = GData.jobTypes.Where(j => j.typeName == jobType.ToString()).ToList()[0].background;
                     row.Cells["jobType"].Style.BackColor = ColorTranslator.FromHtml(background);
                 }
+                if (Convert.ToDouble(row.Cells["timeRemaining"].Value) < 0)
+                    row.Cells["timeRemaining"].Style.ForeColor = Color.Red;
             }
         }
         private void add_Btn_Click(object sender, EventArgs e)
@@ -139,7 +150,7 @@ namespace Hordens
                 int index = dataGridView1.SelectedRows[0].Index;
                 int id = (int)dataGridView1.Rows[index].Cells["ID"].Value;
                 var result = MessageBox.Show("Are you sure want to deleted this booking?", "Warning!", MessageBoxButtons.YesNo);
-                Booking booking = Info.bookings.Where(b => b.id == id).ToList()[0];
+                Booking booking = GData.bookings.Where(b => b.id == id).ToList()[0];
                 if (result == DialogResult.Yes)
                 {
                     if (DatabaseControl.deleteBooking(booking))
@@ -162,7 +173,7 @@ namespace Hordens
                 return;
 
             UIControl.showForm(UIControl.bookingDetailForm);
-            Booking booking = Info.bookings[dataGridView1.SelectedRows[0].Index];
+            Booking booking = GData.bookings[dataGridView1.SelectedRows[0].Index];
             UIControl.bookingDetailForm.getDescription(booking);
 
         }
@@ -177,20 +188,20 @@ namespace Hordens
             if (e.ColumnIndex == dataGridView1.Columns["dataGridViewEditButton"].Index)
             {
                 UIControl.showForm(UIControl.editBookingForm);                
-                UIControl.editBookingForm.bookingToEdit = Info.bookings.Where(b => b.id == id).ToList()[0];
+                UIControl.editBookingForm.bookingToEdit = GData.bookings.Where(b => b.id == id).ToList()[0];
                 UIControl.editBookingForm.getDescription();
             }
             if (e.ColumnIndex == dataGridView1.Columns["customer"].Index)
             {
                 UIControl.showForm(UIControl.bookingDetailForm);
-                Booking booking = Info.bookings[dataGridView1.SelectedRows[0].Index];
+                Booking booking = GData.bookings.Where(b => b.id == id).ToList()[0];
                 UIControl.bookingDetailForm.getDescription(booking);
             }
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {            
-            foreach (DateTime dt in Info.blackoutDates)
+            foreach (DateTime dt in GData.blackoutDates)
             {
                 if (dt.Date == dateTimePicker1.Value.Date)
                 {
@@ -209,6 +220,8 @@ namespace Hordens
             showBookings();
         }
 
+        
+
         private void prevDay_Btn_Click(object sender, EventArgs e)
         {
             dateTimePicker1.Value = dateTimePicker1.Value.AddDays(-1);
@@ -216,6 +229,28 @@ namespace Hordens
 
         private void nextDay_Btn_Click(object sender, EventArgs e)
         {
+            bool firstMove = false;
+            List<Booking> bookings = GData.bookings.Where(b => b.bookingDate.Date == dateTimePicker1.Value.Date).ToList();
+            foreach (Booking booking in bookings)
+            {
+                if (booking.timeRemaining < 0)
+                {
+                    //booking.estimatedTime = - booking.timeRemaining;
+                    if (!firstMove)
+                    {
+                        DatabaseControl.moveBookingToNextDate(booking, -booking.timeRemaining);
+                        booking.estimatedTime += booking.timeRemaining;
+                        DatabaseControl.updateBooking(booking);
+                    }
+                    else
+                    {
+                        DatabaseControl.moveBookingToNextDate(booking, booking.estimatedTime);
+                        booking.estimatedTime = 0;
+                        DatabaseControl.updateBooking(booking);
+                    }
+                    firstMove = true;
+                }
+            }
             dateTimePicker1.Value = dateTimePicker1.Value.AddDays(1);
         }
 
@@ -283,9 +318,9 @@ namespace Hordens
                 workingHours_Txt.Focus();
                 return;
             }
-            else if (Convert.ToDouble(workingHours_Txt.Text) > 24 || Convert.ToDouble(workingHours_Txt.Text) < 0)
+            else if (Convert.ToDouble(workingHours_Txt.Text) < 0)
             {
-                MessageBox.Show("Invalid working hours. Should be numeric value between 0 and 24. Please try again!");
+                MessageBox.Show("Invalid working hours. Should be numeric value over 0. Please try again!");
                 workingHours_Txt.Text = "0";
                 workingHours_Txt.Focus();
                 return;

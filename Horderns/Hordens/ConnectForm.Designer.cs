@@ -37,8 +37,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.port_Txt = new System.Windows.Forms.TextBox();
             this.connect_Bt = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.database_Txt = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -121,7 +119,7 @@
             // connect_Bt
             // 
             this.connect_Bt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.connect_Bt.Location = new System.Drawing.Point(216, 245);
+            this.connect_Bt.Location = new System.Drawing.Point(216, 209);
             this.connect_Bt.Name = "connect_Bt";
             this.connect_Bt.Size = new System.Drawing.Size(75, 23);
             this.connect_Bt.TabIndex = 2;
@@ -129,36 +127,15 @@
             this.connect_Bt.UseVisualStyleBackColor = true;
             this.connect_Bt.Click += new System.EventHandler(this.connect_Bt_Click);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(31, 193);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 16);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Database";
-            // 
-            // database_Txt
-            // 
-            this.database_Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.database_Txt.Location = new System.Drawing.Point(127, 190);
-            this.database_Txt.Name = "database_Txt";
-            this.database_Txt.Size = new System.Drawing.Size(164, 22);
-            this.database_Txt.TabIndex = 3;
-            this.database_Txt.Text = "Horderns";
-            // 
             // ConnectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(321, 303);
+            this.ClientSize = new System.Drawing.Size(321, 252);
             this.Controls.Add(this.connect_Bt);
             this.Controls.Add(this.port_Txt);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.database_Txt);
             this.Controls.Add(this.password_Txt);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.user_Txt);
             this.Controls.Add(this.label2);
@@ -183,8 +160,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox port_Txt;
         private System.Windows.Forms.Button connect_Bt;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox database_Txt;
     }
 }
 

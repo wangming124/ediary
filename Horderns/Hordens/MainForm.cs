@@ -84,8 +84,7 @@ namespace Hordens
         }
 
         private void close_Btn_Click(object sender, EventArgs e)
-        {
-            DatabaseControl.con.Close();
+        {            
             Application.Exit();
         }      
     }

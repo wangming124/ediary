@@ -15,7 +15,7 @@ namespace Hordens
         // Initialize list of "Job Types" and "Estimated Time" when loading this form
         private void NewBookingForm_Load(object sender, EventArgs e)
         {
-            foreach (var item in Info.jobTypes)
+            foreach (var item in GData.jobTypes)
             {
                 jobType_Cmb.Items.Add(item.typeName);
             }
@@ -44,8 +44,8 @@ namespace Hordens
                 return;
             }
             // Check if a job No already exists in the database
-            Info.bookings = DatabaseControl.getBookings();
-            var list = Info.bookings.Where(b => b.jobNO == jobNO_Txt.Text).ToList();
+            GData.bookings = DatabaseControl.getBookings();
+            var list = GData.bookings.Where(b => b.jobNO == jobNO_Txt.Text).ToList();
             if (list.Count > 0)
             {
                 MessageBox.Show("The booking with Job No. " + jobNO_Txt.Text + " already exists! Please input another Job No.");
@@ -114,6 +114,13 @@ namespace Hordens
                 vehicleModel_Txt.Focus();
                 return;
             }
+            // Check if an Vehicle Reg.No filed is not empty.
+            if (vehicleRegNo_Txt.Text == "")
+            {
+                MessageBox.Show("Vehicle Reg.NO field can not be empty. Please input!");
+                vehicleRegNo_Txt.Focus();
+                return;
+            }
             // Check if an Booked By filed is not empty.
             if (bookedBy_Txt.Text == "")
             {
@@ -130,10 +137,10 @@ namespace Hordens
             }
             
             // Compare Time in and Time Out
-            if (Convert.ToDouble(timeIn_Cmb.Text) > Convert.ToDouble(timeOut_Cmb.Text))
+            if (timeIn_Dtp.Value.Hour * 60 + timeIn_Dtp.Value.Minute > timeOut_Dtp.Value.Hour * 60 + timeOut_Dtp.Value.Minute)
             {
                 MessageBox.Show("Time in should be less than Time Out!");
-                timeIn_Cmb.Focus();
+                timeIn_Dtp.Focus();
                 return;
             }
 
@@ -157,11 +164,11 @@ namespace Hordens
             }
             else
             {
-                customerId = Info.customers[existingCustomer_Cmb.SelectedIndex - 1].id;
+                customerId = GData.customers[existingCustomer_Cmb.SelectedIndex - 1].id;
                 DatabaseControl.updateCustomer(customer, customerId);
             }
-            double estimatedTime = Convert.ToDouble(timeOut_Cmb.Text) - Convert.ToDouble(timeIn_Cmb.Text);
-            double timeRemaining = DatabaseControl.getBookingDates(DateTime.Now.Date) - estimatedTime;
+            double estimatedTime = Convert.ToDouble(estimatedTime_Txt.Text);
+            double timeRemaining = DatabaseControl.getHoursOfBookingDate(DateTime.Now.Date) - estimatedTime;
             if (timeRemaining < 0)
                 timeRemaining = 0;
             var newBooking = new Booking
@@ -172,11 +179,11 @@ namespace Hordens
                 servicePlan = servicePlan_Cmb.Text,
                 vehicleMake = vehicleMake_Txt.Text,
                 vehicleModel = vehicleModel_Txt.Text,
-                vehicleRegNo = vehicleRegNo_Txt.Text,
+                regNo = vehicleRegNo_Txt.Text,
                 mileage = Convert.ToDouble(mileage_Txt.Text),
                 loanCar = loanCar_Cmb.Text,
-                timeIn = Convert.ToDouble(timeIn_Cmb.Text),
-                timeOut = Convert.ToDouble(timeOut_Cmb.Text),
+                timeIn = timeIn_Dtp.Value,
+                timeOut = timeOut_Dtp.Value,
                 bookedBy = bookedBy_Txt.Text,
                 estimatedTime = estimatedTime,
                 timeRemaining = timeRemaining,
@@ -185,12 +192,57 @@ namespace Hordens
                 notes = notes_Txt.Text,
                 bookingDate = newBookingDate
             };
-            if (DatabaseControl.addBooking(newBooking))
-            {
-                MessageBox.Show("New booking has been added succesfully!");
-                UIControl.bookingGridForm.showBookings();
-                clearFields();
-            }
+            //if (newBooking.timeRemaining > 0)
+            //{
+            //    var newBookingToNextDay = new Booking
+            //    {
+            //        jobNO = jobNO_Txt.Text,
+            //        jobType = jobType_Cmb.Text,
+            //        customerID = customerId,
+            //        servicePlan = servicePlan_Cmb.Text,
+            //        vehicleMake = vehicleMake_Txt.Text,
+            //        vehicleModel = vehicleModel_Txt.Text,
+            //        regNo = vehicleRegNo_Txt.Text,
+            //        mileage = Convert.ToDouble(mileage_Txt.Text),
+            //        loanCar = loanCar_Cmb.Text,
+            //        timeIn = timeIn_Dtp.Value,
+            //        timeOut = timeOut_Dtp.Value,
+            //        bookedBy = bookedBy_Txt.Text,
+            //        estimatedTime = newBooking.timeRemaining,
+            //        timeRemaining = DatabaseControl.getHoursOfBookingDate(DateTime.Now.Date) - newBooking.timeRemaining,
+            //        insuranceRequired = insurance_Cmb.Text,
+            //        jobDescription = jobDescription_Txt.Text,
+            //        notes = notes_Txt.Text,
+            //        bookingDate = newBookingDate.AddDays(1)
+            //    };
+            //    foreach (DateTime dt in GData.blackoutDates)
+            //    {
+            //        if (dt.Date == newBookingToNextDay.bookingDate.Date)
+            //        {
+            //            newBookingToNextDay.bookingDate.AddDays(1);
+            //            break;
+            //        }
+            //    }
+            //    if (newBookingToNextDay.bookingDate.DayOfWeek == DayOfWeek.Sunday)
+            //    {
+            //        newBookingToNextDay.bookingDate.AddDays(1);
+            //    }
+            //    if (DatabaseControl.addBooking(newBooking) && DatabaseControl.addBooking(newBookingToNextDay))
+            //    {
+            //        MessageBox.Show("New booking has been added succesfully!");
+            //        UIControl.bookingGridForm.showBookings();
+            //        clearFields();
+            //    }
+            //}
+            //else
+            //{
+                if (DatabaseControl.addBooking(newBooking))
+                {
+                    MessageBox.Show("New booking has been added succesfully!");
+                    UIControl.bookingGridForm.showBookings();
+                    clearFields();
+                }
+            //}
         }
 
        
@@ -213,9 +265,9 @@ namespace Hordens
             vehicleRegNo_Txt.Text = "";
             mileage_Txt.Text = "0";
             loanCar_Cmb.SelectedIndex = 0;
-            bookedBy_Txt.Text = Info.userID;
-            timeIn_Cmb.Text = "0";
-            timeOut_Cmb.Text = "0";
+            bookedBy_Txt.Text = GData.userID;
+            timeIn_Dtp.Value = DateTime.Now;
+            timeOut_Dtp.Value = DateTime.Now;
             estimatedTime_Txt.Text = "0";
             insurance_Cmb.SelectedIndex = 1;
             jobDescription_Txt.Text = "";
@@ -224,9 +276,9 @@ namespace Hordens
 
         public void updateJobTypes()
         {
-            Info.jobTypes = DatabaseControl.getJobTypes();
+            GData.jobTypes = DatabaseControl.getJobTypes();
             jobType_Cmb.Items.Clear();
-            foreach(JobType job in Info.jobTypes)
+            foreach(JobType job in GData.jobTypes)
             {
                 jobType_Cmb.Items.Add(job.typeName);
             }
@@ -234,10 +286,10 @@ namespace Hordens
         }
         public void updateCustomers()
         {
-            Info.customers = DatabaseControl.getCustomers();
+            GData.customers = DatabaseControl.getCustomers();
             existingCustomer_Cmb.Items.Clear();
             existingCustomer_Cmb.Items.Add("(New)");
-            foreach (Customer customer in Info.customers)
+            foreach (Customer customer in GData.customers)
             {
                 existingCustomer_Cmb.Items.Add(customer.name);
             }
@@ -278,7 +330,7 @@ namespace Hordens
             }
             else
             {
-                customer = Info.customers[existingCustomer_Cmb.SelectedIndex - 1];
+                customer = GData.customers[existingCustomer_Cmb.SelectedIndex - 1];
                 honor_Cmb.Text = customer.honor;
                 customerName_Txt.Text = customer.name;
                 address1_Txt.Text = customer.address1;
@@ -290,11 +342,11 @@ namespace Hordens
             }
         }
 
-        private void setTimeRemaining()
-        {
-            if (timeOut_Cmb.Text != "" && timeIn_Cmb.Text != "")
-                estimatedTime_Txt.Text = (Convert.ToDouble(timeOut_Cmb.Text) - Convert.ToDouble(timeIn_Cmb.Text)).ToString();
-        }
+        //private void setTimeRemaining()
+        //{
+        //    if (timeOut_Dtp.Text != "" && timeIn_Dtp.Text != "")
+        //        estimatedTime_Txt.Text = (Convert.ToDouble(timeOut_Dtp.Text) - Convert.ToDouble(timeIn_Dtp.Text)).ToString();
+        //}
 
         private void mileage_Txt_Leave(object sender, EventArgs e)
         {
@@ -306,17 +358,7 @@ namespace Hordens
             {
                 MessageBox.Show("Invalid number format!");
                 mileage_Txt.Text = "0";
-            }
-        }
-
-        private void timeIn_Cmb_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            setTimeRemaining();
-        }
-
-        private void timeOut_Cmb_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            setTimeRemaining();
-        }
+            }            
+        } 
     }
 }

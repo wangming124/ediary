@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,7 +57,7 @@
   <ItemGroup>
     <Compile Include="Control\DatabaseControl.cs" />
     <Compile Include="Control\UIControl.cs" />
-    <Compile Include="Info.cs" />
+    <Compile Include="GData.cs" />
     <Compile Include="Forms\BookingDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,9 +132,10 @@
     </Compile>
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\HordernsDB.cs" />
     <Compile Include="Models\JobType.cs" />
     <Compile Include="Models\Technician.cs" />
-    <Compile Include="Models\Date.cs" />
+    <Compile Include="Models\BookingDate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\BookingDetailForm.resx">

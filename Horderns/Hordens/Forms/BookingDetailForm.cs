@@ -25,12 +25,12 @@ namespace Hordens
         {
             jobNO_Txt.Text = booking.jobNO;
             jobType_Txt.Text = booking.jobType;
-            Customer customer = Info.customers.Where(c => c.id == booking.customerID).ToList()[0];
+            Customer customer = GData.customers.Where(c => c.id == booking.customerID).ToList()[0];
             honor_Txt.Text = customer.honor;
             customerName_Txt.Text = customer.name;
             vehicleMake_Txt.Text = booking.vehicleMake;
             vehicleModel_Txt.Text = booking.vehicleModel;
-            vehicleRegNo_Txt.Text = booking.vehicleRegNo;
+            vehicleRegNo_Txt.Text = booking.regNo;
             loanCar_Txt.Text = booking.loanCar;
             timeIn_Txt.Text = booking.timeIn.ToString();
             timeOut_Txt.Text = booking.timeOut.ToString();

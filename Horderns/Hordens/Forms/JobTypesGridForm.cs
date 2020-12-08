@@ -57,8 +57,8 @@ namespace Hordens
         public void showJobTypes()
         {
             BindingSource bs = new BindingSource();
-            Info.jobTypes = DatabaseControl.getJobTypes();
-            bs.DataSource = Info.jobTypes.Select(j => new FilteredJobType()
+            GData.jobTypes = DatabaseControl.getJobTypes();
+            bs.DataSource = GData.jobTypes.Select(j => new FilteredJobType()
             {
                 id = j.id,
                 typeName = j.typeName,
@@ -106,7 +106,7 @@ namespace Hordens
 
                 if (result == DialogResult.Yes)
                 {
-                    JobType jobType = Info.jobTypes.Where(j => j.id == id).ToList()[0];
+                    JobType jobType = GData.jobTypes.Where(j => j.id == id).ToList()[0];
                     if (DatabaseControl.deleteJobType(jobType))
                     {
                         MessageBox.Show("Selected Job Type has been deleted!");
@@ -129,7 +129,7 @@ namespace Hordens
             if (e.ColumnIndex == dataGridView1.Columns["dataGridViewEditButton"].Index)
             {
                 UIControl.showForm(UIControl.editJobTypeForm);
-                UIControl.editJobTypeForm.jobTypeToEdit = Info.jobTypes.Where(j => j.id == id).ToList()[0];
+                UIControl.editJobTypeForm.jobTypeToEdit = GData.jobTypes.Where(j => j.id == id).ToList()[0];
                 UIControl.editJobTypeForm.getDescription();
             }
         }

@@ -21,45 +21,41 @@ namespace Hordens
 
         private void connect_Bt_Click(object sender, EventArgs e)
         {
-            Info.hostAddress = hostAddress_Txt.Text;
-            if (Info.hostAddress == "")
+            GData.hostAddress = hostAddress_Txt.Text;
+            if (GData.hostAddress == "")
             {
                 MessageBox.Show("Please input Host Address");
                 hostAddress_Txt.Focus();
                 return;
             }
 
-            Info.userID = user_Txt.Text;
-            if (Info.userID == "")
+            GData.userID = user_Txt.Text;
+            if (GData.userID == "")
             {
                 MessageBox.Show("Please input User ID");
                 user_Txt.Focus();
                 return;
             }
 
-            Info.password = password_Txt.Text;
-            Info.port = port_Txt.Text;
-            Info.database = database_Txt.Text;
-            if (Info.database == "")
-            {
-                MessageBox.Show("Please input Database Name");
-                database_Txt.Focus();
-                return;
-            }
-            string conStr = "Data Source=" + Info.hostAddress + "\\SQLEXPRESS," + Info.port +
-                ";Network Library=DBMSSOCN;Initial Catalog=" + Info.database +
-                ";User ID=" + Info.userID + ";Password=" + Info.password;
+            GData.password = password_Txt.Text;
+            GData.port = port_Txt.Text;
+            
+            GData.conStr = "Data Source=" + GData.hostAddress + "\\SQLEXPRESS," + GData.port +
+                ";Network Library=DBMSSOCN;User ID=" + GData.userID + ";Password=" + GData.password;
+
+            GData.conStr1 = "Data Source=" + GData.hostAddress + "\\SQLEXPRESS," + GData.port +
+                ";Network Library=DBMSSOCN;;Initial Catalog=HordernsDB;User ID=" + GData.userID + ";Password=" + GData.password;
 
             //string conStr = "Data Source=" + Info.hostAddress +
             //    ";Integrated Security=SSPI;Initial Catalog=" + Info.database + ";";
 
             // Connect to Database and get data of Booking, JobType, and Technicians
-            if (DatabaseControl.ConnectToDatabase(conStr))
+            if (DatabaseControl.CreateDBIfNotExists())
             {
-                Info.bookings = DatabaseControl.getBookings();
-                Info.jobTypes = DatabaseControl.getJobTypes();
-                Info.technicians = DatabaseControl.getTechnicians();
-                Info.customers = DatabaseControl.getCustomers();
+                GData.bookings = DatabaseControl.getBookings();
+                GData.jobTypes = DatabaseControl.getJobTypes();
+                GData.technicians = DatabaseControl.getTechnicians();
+                GData.customers = DatabaseControl.getCustomers();
                 UIControl.mainForm.Show();
                 this.Hide();
             }

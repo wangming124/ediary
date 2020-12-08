@@ -30,6 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.timeOut_Dtp = new System.Windows.Forms.DateTimePicker();
+            this.timeIn_Dtp = new System.Windows.Forms.DateTimePicker();
             this.bookedBy_Txt = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
             this.existingCustomer_Cmb = new System.Windows.Forms.ComboBox();
@@ -54,8 +56,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.jobType_Cmb = new System.Windows.Forms.ComboBox();
-            this.timeOut_Cmb = new System.Windows.Forms.ComboBox();
-            this.timeIn_Cmb = new System.Windows.Forms.ComboBox();
             this.servicePlan_Cmb = new System.Windows.Forms.ComboBox();
             this.loanCar_Cmb = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -90,6 +90,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,6 +109,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.timeOut_Dtp);
+            this.panel1.Controls.Add(this.timeIn_Dtp);
             this.panel1.Controls.Add(this.bookedBy_Txt);
             this.panel1.Controls.Add(this.label34);
             this.panel1.Controls.Add(this.existingCustomer_Cmb);
@@ -116,6 +119,7 @@
             this.panel1.Controls.Add(this.cancel_Btn);
             this.panel1.Controls.Add(this.save_Btn);
             this.panel1.Controls.Add(this.label30);
+            this.panel1.Controls.Add(this.label36);
             this.panel1.Controls.Add(this.label20);
             this.panel1.Controls.Add(this.label19);
             this.panel1.Controls.Add(this.label18);
@@ -132,8 +136,6 @@
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.jobType_Cmb);
-            this.panel1.Controls.Add(this.timeOut_Cmb);
-            this.panel1.Controls.Add(this.timeIn_Cmb);
             this.panel1.Controls.Add(this.servicePlan_Cmb);
             this.panel1.Controls.Add(this.loanCar_Cmb);
             this.panel1.Controls.Add(this.label2);
@@ -174,6 +176,26 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(882, 576);
             this.panel1.TabIndex = 1;
+            // 
+            // timeOut_Dtp
+            // 
+            this.timeOut_Dtp.CustomFormat = "HH:mm";
+            this.timeOut_Dtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.timeOut_Dtp.Location = new System.Drawing.Point(678, 224);
+            this.timeOut_Dtp.Name = "timeOut_Dtp";
+            this.timeOut_Dtp.ShowUpDown = true;
+            this.timeOut_Dtp.Size = new System.Drawing.Size(121, 20);
+            this.timeOut_Dtp.TabIndex = 46;
+            // 
+            // timeIn_Dtp
+            // 
+            this.timeIn_Dtp.CustomFormat = "HH:mm";
+            this.timeIn_Dtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.timeIn_Dtp.Location = new System.Drawing.Point(678, 195);
+            this.timeIn_Dtp.Name = "timeIn_Dtp";
+            this.timeIn_Dtp.ShowUpDown = true;
+            this.timeIn_Dtp.Size = new System.Drawing.Size(121, 20);
+            this.timeIn_Dtp.TabIndex = 46;
             // 
             // bookedBy_Txt
             // 
@@ -254,7 +276,7 @@
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.Color.Red;
-            this.label30.Location = new System.Drawing.Point(657, 312);
+            this.label30.Location = new System.Drawing.Point(657, 285);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(15, 20);
             this.label30.TabIndex = 15;
@@ -410,9 +432,9 @@
             this.insurance_Cmb.FormattingEnabled = true;
             this.insurance_Cmb.ItemHeight = 13;
             this.insurance_Cmb.Items.AddRange(new object[] {
-            "Yes",
-            "No"});
-            this.insurance_Cmb.Location = new System.Drawing.Point(678, 282);
+            "Dealership",
+            "Own"});
+            this.insurance_Cmb.Location = new System.Drawing.Point(678, 311);
             this.insurance_Cmb.Name = "insurance_Cmb";
             this.insurance_Cmb.Size = new System.Drawing.Size(121, 21);
             this.insurance_Cmb.TabIndex = 18;
@@ -445,78 +467,6 @@
             this.jobType_Cmb.Size = new System.Drawing.Size(172, 21);
             this.jobType_Cmb.TabIndex = 2;
             // 
-            // timeOut_Cmb
-            // 
-            this.timeOut_Cmb.FormattingEnabled = true;
-            this.timeOut_Cmb.ItemHeight = 13;
-            this.timeOut_Cmb.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24"});
-            this.timeOut_Cmb.Location = new System.Drawing.Point(678, 225);
-            this.timeOut_Cmb.Name = "timeOut_Cmb";
-            this.timeOut_Cmb.Size = new System.Drawing.Size(121, 21);
-            this.timeOut_Cmb.TabIndex = 19;
-            this.timeOut_Cmb.SelectedIndexChanged += new System.EventHandler(this.timeOut_Cmb_SelectedIndexChanged);
-            // 
-            // timeIn_Cmb
-            // 
-            this.timeIn_Cmb.FormattingEnabled = true;
-            this.timeIn_Cmb.ItemHeight = 13;
-            this.timeIn_Cmb.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24"});
-            this.timeIn_Cmb.Location = new System.Drawing.Point(678, 198);
-            this.timeIn_Cmb.Name = "timeIn_Cmb";
-            this.timeIn_Cmb.Size = new System.Drawing.Size(121, 21);
-            this.timeIn_Cmb.TabIndex = 19;
-            this.timeIn_Cmb.SelectedIndexChanged += new System.EventHandler(this.timeIn_Cmb_SelectedIndexChanged);
-            // 
             // servicePlan_Cmb
             // 
             this.servicePlan_Cmb.FormattingEnabled = true;
@@ -540,7 +490,7 @@
             "Run Home",
             "Loan Car",
             "C & D"});
-            this.loanCar_Cmb.Location = new System.Drawing.Point(678, 310);
+            this.loanCar_Cmb.Location = new System.Drawing.Point(678, 283);
             this.loanCar_Cmb.Name = "loanCar_Cmb";
             this.loanCar_Cmb.Size = new System.Drawing.Size(121, 21);
             this.loanCar_Cmb.TabIndex = 19;
@@ -638,7 +588,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(592, 283);
+            this.label12.Location = new System.Drawing.Point(592, 312);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(69, 16);
             this.label12.TabIndex = 0;
@@ -832,11 +782,23 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(596, 310);
+            this.label8.Location = new System.Drawing.Point(596, 283);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(66, 16);
             this.label8.TabIndex = 0;
             this.label8.Text = "Requires:";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.ForeColor = System.Drawing.Color.Red;
+            this.label36.Location = new System.Drawing.Point(657, 138);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(15, 20);
+            this.label36.TabIndex = 15;
+            this.label36.Text = "*";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NewBookingForm
             // 
@@ -920,7 +882,8 @@
         private System.Windows.Forms.ComboBox servicePlan_Cmb;
         private System.Windows.Forms.TextBox mileage_Txt;
         private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.ComboBox timeOut_Cmb;
-        private System.Windows.Forms.ComboBox timeIn_Cmb;
+        private System.Windows.Forms.DateTimePicker timeIn_Dtp;
+        private System.Windows.Forms.DateTimePicker timeOut_Dtp;
+        private System.Windows.Forms.Label label36;
     }
 }

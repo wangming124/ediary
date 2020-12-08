@@ -57,8 +57,8 @@ namespace Hordens
         public void showTechnicians()
         {
             BindingSource bs = new BindingSource();
-            Info.technicians = DatabaseControl.getTechnicians();
-            bs.DataSource = Info.technicians.Select(s => new FilteredTechnician()
+            GData.technicians = DatabaseControl.getTechnicians();
+            bs.DataSource = GData.technicians.Select(s => new FilteredTechnician()
             {
                 id = s.id,
                 name = s.name,
@@ -82,7 +82,7 @@ namespace Hordens
 
                 if (result == DialogResult.Yes)
                 {
-                    Technician technician = Info.technicians.Where(t => t.id == id).ToList()[0];
+                    Technician technician = GData.technicians.Where(t => t.id == id).ToList()[0];
                     if (DatabaseControl.deleteTechnician(technician))
                     {
                         MessageBox.Show("Selected Technician has been deleted!");
@@ -122,14 +122,14 @@ namespace Hordens
             if (e.ColumnIndex == dataGridView1.Columns["dataGridViewEditButton"].Index)
             {
                 UIControl.showForm(UIControl.editTechnicianForm);
-                UIControl.editTechnicianForm.technicianToEdit = Info.technicians.Where(b => b.id == id).ToList()[0];
+                UIControl.editTechnicianForm.technicianToEdit = GData.technicians.Where(b => b.id == id).ToList()[0];
                 UIControl.editTechnicianForm.getDescription();
             }
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            foreach (DateTime dt in Info.blackoutDates)
+            foreach (DateTime dt in GData.blackoutDates)
             {
                 if (dt.Date == dateTimePicker1.Value.Date)
                 {
